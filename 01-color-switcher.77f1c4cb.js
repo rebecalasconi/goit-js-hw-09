@@ -1,0 +1,2 @@
+const e=document.querySelector("button[data-start]"),t=document.querySelector("button[data-stop]");let o;t.addEventListener("click",(()=>{e.disabled=!1,clearInterval(o),console.log("The timer has been stopped!"),t.disabled=!0})),e.addEventListener("click",(()=>{o=setInterval((()=>{document.body.style.backgroundColor=`#${Math.floor(16777215*Math.random()).toString(16).padStart(6,0)}`,console.log("New backgorund-color every 1 sec!")}),1e3),e.disabled=!0,t.disabled=!1}));
+//# sourceMappingURL=01-color-switcher.77f1c4cb.js.map
