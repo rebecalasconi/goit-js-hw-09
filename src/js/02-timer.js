@@ -1,3 +1,4 @@
+
 'use strict';
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
@@ -31,6 +32,10 @@ const options = {
     continueInterval();
     startBtn.disabled = true;
     });
+
+
+
+
                 
     function continueInterval() {
     timerId = setInterval(countDownTimeToNY, 1000);
@@ -43,9 +48,13 @@ const options = {
   const hour = minute * 60;
   const day = hour * 24;
 
+
   const days = Math.floor(diff / day);
+
   const hours = Math.floor((diff % day) / hour);
+
   const minutes = Math.floor(((diff % day) % hour) / minute);
+
   const seconds = Math.floor((((diff % day) % hour) % minute) / second);
 
  daysV.textContent = `${days}`;
