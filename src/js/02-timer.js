@@ -8,6 +8,7 @@ let daysV = document.querySelector("span[data-days]");
 let hoursV = document.querySelector("span[data-hours]");
 let minutesV = document.querySelector("span[data-minutes]");
 let secondsV = document.querySelector("span[data-seconds]");
+const dateToday = new Date();
 
 const options = {
     enableTime: true,
@@ -15,59 +16,53 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-      console.log(selectedDates[0]);
-      return selectedDates[0]
-    },
-  };
+              let value = selectedDates[0];
+                 if (value < dateToday) {
+                  window.alert(`Please choose a date in the future`);
+                  startBtn.disabled = true;
+                 } else {
+                  startBtn.disabled = false;
+                 }
+                 diff = value - dateToday;
+                 
+                 let timerId = setInterval(countDownTimeToNY, 1000);
+                 
+                 countDownTimeToNY();
 
-  input.flatpickr('selector', [options]);
-const dateToday = new Date();
+                 startBtn.addEventListener('click', () => {
+                  continueInterval();
+                  startBtn.disabled = true;
+                });
+                
+                 function continueInterval() {
+                   timerId = setInterval(countDownTimeToNY, 1000);
+                 }
 
-input.flatpickr({
-    mode: "single",
-    onChange: function(selectedDates) {
-        let value = new Date(selectedDates);
-           if (value < dateToday) {
-            window.alert(`Please choose a date in the future`);
-            startBtn.disabled = true;
-           } else {
-            startBtn.disabled = false;
-           }
-           const diff = value - dateToday;
-           console.log(diff);
-
-            const days = Math.floor(diff / (24 * 60 * 60 * 1000));
-            const hours = Math.floor((diff / (60 * 60 * 1000)) % 24);
-            const minutes = Math.floor((diff / (60 * 1000)) % 60);
-            const secounds = Math.floor((diff / 1000) % 60);
-          
-            daysV.textContent = `${days}`;
-            hoursV.textContent = `${hours}`;
-            minutesV.textContent = `${minutes}`;
-            secondsV.textContent = `${seconds}`;
-          
+  function countDownTimeToNY() {
            
-            if (diff <= 0) {
-              stopInverval();
-              alert('Happy New Year!');
-            }
-          }
-});
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+
+  // Remaining days
+  const days = Math.floor(diff / day);
+  // Remaining hours
+  const hours = Math.floor((diff % day) / hour);
+  // Remaining minutes
+  const minutes = Math.floor(((diff % day) % hour) / minute);
+  // Remaining seconds
+  const seconds = Math.floor((((diff % day) % hour) % minute) / second);
+
+ daysV.textContent = `${days}`;
+ hoursV.textContent = `${hours}`;
+ minutesV.textContent = `${minutes}`;
+ secondsV.textContent = `${seconds}`;
+    console.log(diff);
+    return { daysV, hoursV, minutesV, secondsV };
+     } 
+}};      
+                
 
 
-let timerId = setInterval(selectedDates, 1000);
-
-
-
-startBtn.addEventListener('click', () => {
-  continueInterval();
-  console.log(`i`);
-  startBtn.disabled = true;
-});
-
-
-
-function continueInterval() {
-  alert('continue interval');
-  timerId = setInterval(selectedDates, 1000);
-}
+ flatpickr(input, options);
