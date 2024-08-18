@@ -25,7 +25,7 @@ const options = {
          startBtn.disabled = false;
         }
   
-    diff = value - dateToday;    
+    let diff = value - dateToday;    
     let timerId = setInterval(countDownTimeToNY, 1000);
                  
     startBtn.addEventListener('click', () => {
