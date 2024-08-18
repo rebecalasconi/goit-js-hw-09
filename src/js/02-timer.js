@@ -16,53 +16,49 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-              let value = selectedDates[0];
-                 if (value < dateToday) {
-                  window.alert(`Please choose a date in the future`);
-                  startBtn.disabled = true;
-                 } else {
-                  startBtn.disabled = false;
-                 }
-                 diff = value - dateToday;
+       let value = selectedDates[0];
+         if (value < dateToday) {
+         window.alert(`Please choose a date in the future`);
+         startBtn.disabled = true;
+        } else {
+         startBtn.disabled = false;
+        }
+  
+    diff = value - dateToday;    
+    let timerId = setInterval(countDownTimeToNY, 1000);
                  
-                 let timerId = setInterval(countDownTimeToNY, 1000);
-                 
-                 countDownTimeToNY();
-
-                 startBtn.addEventListener('click', () => {
-                  continueInterval();
-                  startBtn.disabled = true;
-                });
+    startBtn.addEventListener('click', () => {
+    continueInterval();
+    startBtn.disabled = true;
+    });
                 
-                 function continueInterval() {
-                   timerId = setInterval(countDownTimeToNY, 1000);
-                 }
+    function continueInterval() {
+    timerId = setInterval(countDownTimeToNY, 1000);
+    }
 
-  function countDownTimeToNY() {
+    function countDownTimeToNY() {
            
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
 
-  // Remaining days
   const days = Math.floor(diff / day);
-  // Remaining hours
   const hours = Math.floor((diff % day) / hour);
-  // Remaining minutes
   const minutes = Math.floor(((diff % day) % hour) / minute);
-  // Remaining seconds
   const seconds = Math.floor((((diff % day) % hour) % minute) / second);
 
  daysV.textContent = `${days}`;
  hoursV.textContent = `${hours}`;
  minutesV.textContent = `${minutes}`;
  secondsV.textContent = `${seconds}`;
-    console.log(diff);
-    return { daysV, hoursV, minutesV, secondsV };
-     } 
+
+ console.log(diff);
+ return { daysV, hoursV, minutesV, secondsV };
+
+} countDownTimeToNY();
 }};      
                 
 
 
- flatpickr(input, options);
+flatpickr(input, options);
