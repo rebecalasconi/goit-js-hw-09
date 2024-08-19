@@ -15,6 +15,14 @@ const dateToday = new Date();
 let diff;
 let value;
 
+startBtn.addEventListener('click', () => {
+  continueInterval();
+  startBtn.disabled = true;
+  });
+
+countDownTimer();
+let timerId = setInterval(countDownTimer, 1000);
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -28,21 +36,14 @@ const options = {
       } else {
       startBtn.disabled = false;
       }
-  
-  startBtn.addEventListener('click', () => {
-    continueInterval();
-    startBtn.disabled = true;
-    });
+}};      
+ 
+function continueInterval() {
+  timerId = setInterval(countDownTimer, 1000);
+  }
 
-  countDownTimer();
-  let timerId = setInterval(countDownTimer, 1000);
-   
-  function continueInterval() {
-    timerId = setInterval(countDownTimer, 1000);
-    }
-
-  function countDownTimer() {
-    diff = value - dateToday;        
+function countDownTimer() {
+  diff = value - dateToday;        
 
   const second = 1000;
   const minute = second * 60;
@@ -58,8 +59,8 @@ const options = {
   hoursV.textContent = `${hours}`;
   minutesV.textContent = `${minutes}`;
   secondsV.textContent = `${seconds}`;
-  console.log(diff); 
+
+  console.log(value); 
 } 
-}};      
-              
+
 flatpickr(input, options);
